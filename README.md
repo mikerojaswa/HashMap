@@ -1,4 +1,2 @@
 # HashMap
-HashMap
-
-Implementing a HashMap
+Implementation of a HashMap
