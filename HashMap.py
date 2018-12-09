@@ -24,13 +24,13 @@ class HashMap:
 		if not self.map[idx]:
 			self.map[idx] = [map_item]
 		else:
-			self.__append_to_map__(self.map[idx], idx, map_item)
+			self._append_to_map(self.map[idx], idx, map_item)
 		
 		#2/3 rule
 		if self.filled > len(self.map) * (2 / 3):
-			self.__resize__()
+			self._resize()
 			
-	def __append_to_map__(self, arr, idx, to_add):
+	def _append_to_map(self, arr, idx, to_add):
 		added = False
 		for i, item in enumerate(arr):
 			if item.key == to_add.key:
@@ -54,7 +54,7 @@ class HashMap:
 			return None
 		
 		
-	def __resize__(self):
+	def _resize(self):
 		new_size = len(self.map) * 2
 		print("Resizing to: ", new_size)
 		table_copy = copy.deepcopy(self.map) 
@@ -87,9 +87,8 @@ m.insert("aaaaaaaaaa", 10)
 m.insert("aaaaaaaaaaa", 11)
 m.insert("aaaaaaaaaaaa", 12)
 
-
-
-
+m.insert(None, 13)
+print(m.get(None))
 
 	
 
