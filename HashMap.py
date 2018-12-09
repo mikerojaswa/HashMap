@@ -1,23 +1,22 @@
 import copy
 class MapItem:
+	
 	def __init__(self, key, value):
 		self.key = key
 		self.value = value
 
 class HashMap:
+	
 	def __init__(self):
 		self.map = [None] * 8
 		self.filled = 0
 		
-		
+	# Public Api
+	# insert, get, print_map
 	def insert(self, key, value, resizing=False):
 		if not resizing:
-			self.filled += 1
-
-		
-			
+			self.filled += 1	
 		h = hash(key)
-
 		idx = h % (len(self.map) - 1)
 		map_item = MapItem(key, value)
 		
@@ -29,19 +28,7 @@ class HashMap:
 		#2/3 rule
 		if self.filled > len(self.map) * (2 / 3):
 			self._resize()
-			
-	def _append_to_map(self, arr, idx, to_add):
-		added = False
-		for i, item in enumerate(arr):
-			if item.key == to_add.key:
-				added = True
-				self.map[idx][i] = to_add
-				break
-		if not added:
-			arr = self.map[idx]
-			self.map[idx] = arr + [to_add]
-			
-
+	
 	def get(self, key):
 		idx = hash(key) % (len(self.map) - 1)
 		if self.map[idx]:
@@ -51,9 +38,16 @@ class HashMap:
 					return item.value
 			return None
 		else:
-			return None
+			return None	
 		
-		
+	def print_map(self):
+		for l in self.map:
+			if l:
+				for item in l:
+					print(item.key, item.value)
+					
+	# Private
+	# _resize, _append_to_map
 	def _resize(self):
 		new_size = len(self.map) * 2
 		print("Resizing to: ", new_size)
@@ -65,13 +59,17 @@ class HashMap:
 			if l:
 				for item in l:
 					self.insert(item.key, item.value, True)
-			
-		
-	def print_map(self):
-		for l in self.map:
-			if l:
-				for item in l:
-					print(item.key, item.value)
+					
+	def _append_to_map(self, arr, idx, to_add):
+		added = False
+		for i, item in enumerate(arr):
+			if item.key == to_add.key:
+				added = True
+				self.map[idx][i] = to_add
+				break
+		if not added:
+			arr = self.map[idx]
+			self.map[idx] = arr + [to_add]
 
 m = HashMap()
 m.insert("a", 1)
